@@ -41,9 +41,18 @@ class CompassDigitalId
 
 }
 
-module.exports = (data) => {
+module.exports = (data, provider, type, id) => {
 
-    if(typeof data == "string")
+    if(data && provider && type && id)
+    {
+        return CompassDigitalId.encode({
+            service: data,
+            provider: provider,
+            type: type,
+            id: id
+        });
+    }
+    else if(typeof data == "string")
     {
         return CompassDigitalId.decode(data);
     }

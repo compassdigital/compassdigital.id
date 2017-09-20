@@ -33,6 +33,10 @@ var decoded = ID(new_id);
 }
 */
 
+// Convenience method
+new_id = ID("menu", "Acme XYX", "item", "abc1234");
+// lBprpeED47ILDZBwAYB4iwy0D8Ne55INALa576e9iKX4
+
 ```
 
 ## Testing

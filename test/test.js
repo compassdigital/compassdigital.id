@@ -43,6 +43,17 @@ describe("Compass Digital IDs", function()
         done();
     });
 
+    it("should encode an id using params for convenience", function(done)
+    {
+        var new_id = compassdigitalid("menu", "bamco","item", 12345);
+
+        should.exist(new_id);
+        new_id.should.eql(id);
+
+        done();
+
+    });
+
     it("should not create an id if invalid params are passed", function(done)
     {
         should.not.exist(compassdigitalid({
@@ -50,6 +61,8 @@ describe("Compass Digital IDs", function()
             provider: "bamco",
             id: 12345
         }));
+
+        should.not.exist(compassdigitalid("menu", "bamco","item"));
 
         done();
     });
