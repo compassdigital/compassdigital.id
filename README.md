@@ -7,13 +7,13 @@ Creates ids for use in the Compass Digital platform. Decodes ids to reveal the m
 
 ## Installation
 ```sh
-npm install compassdigital/compassdigital.id
+npm install @compassdigital/compassdigital.id
 ```
 
 ## Usage
 
 ```js
-const ID = require("compassdigital.id");
+const ID = require("@compassdigital/compassdigital.id");
 
 var new_id = ID({
     service: "menu",
