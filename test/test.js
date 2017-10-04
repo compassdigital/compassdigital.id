@@ -72,6 +72,12 @@ describe("Compass Digital IDs", function()
         should.not.exist((compassdigitalid("dsfdfsfdf")));
         done();
     });
+
+    it("should not return a decoded id if the id is not valid hex", function(done)
+    {
+        should.not.exist((compassdigitalid("6351810")));
+        done();
+    });
     
     it("should return nothing if a weird type is passed", function(done)
     {

@@ -1,6 +1,6 @@
 {
   "name": "@compassdigital/id",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Compass Digital IDs",
   "main": "index.js",
   "scripts": {

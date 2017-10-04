@@ -20,20 +20,27 @@ class CompassDigitalId
 
     static decode(id)
     {
-        var hex = hashids.decodeHex(id);
-        var joined = Buffer(hex, "hex").toString();
-        var parsed = joined.split(".");
-        
-        if(parsed.length == 4)
+        try
         {
-            return {
-                service: parsed[0],
-                provider: parsed[1],
-                type: parsed[2],
-                id: parsed[3]
-            };
+            var hex = hashids.decodeHex(id);
+            var joined = Buffer(hex, "hex").toString();
+            var parsed = joined.split(".");
+            
+            if(parsed.length == 4)
+            {
+                return {
+                    service: parsed[0],
+                    provider: parsed[1],
+                    type: parsed[2],
+                    id: parsed[3]
+                };
+            }
+            else
+            {
+                return;
+            }
         }
-        else
+        catch(err)
         {
             return;
         }
