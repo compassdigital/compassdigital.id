@@ -43,6 +43,61 @@ describe("Compass Digital IDs", function()
         done();
     });
 
+    it("should decode a version 1 id", function(done)
+    {
+        var old_id = "9PD8DyAg2RFZJ3yoDLYJiapBl0yr71hDZN";
+        old_id.should.not.eql(id);
+
+        compassdigitalid(id).should.eql({
+            service: "menu",
+            provider: "bamco",
+            type: "item",
+            id: "12345"
+        });
+
+        done();
+    });
+
+    it("should make sure that service, provider and type are made lowercased, but not the id", function(done)
+    {
+        var id = compassdigitalid({
+            service: "MENU",
+            provider: "BAMCO",
+            type: "ITEM",
+            id: "12345UPPERlower"
+        });
+        should.exist(id);
+        compassdigitalid(id).should.eql({
+            service: "menu",
+            provider: "bamco",
+            type: "item",
+            id: "12345UPPERlower"
+        });
+
+        done();
+
+    });
+
+    it("should make sure the same id is generated if values are passed uppercase or lowercase", function(done)
+    {
+        var id = compassdigitalid({
+            service: "MENU",
+            provider: "BAMCO",
+            type: "ITEM",
+            id: "12345"
+        });
+        should.exist(id);
+        compassdigitalid({
+            service: "menu",
+            provider: "bamco",
+            type: "item",
+            id: "12345"
+        }).should.eql(id);
+
+        done();
+
+    });
+
     it("should encode an id using params for convenience", function(done)
     {
         var new_id = compassdigitalid("menu", "bamco","item", 12345);

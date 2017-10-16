@@ -1,8 +1,33 @@
-var Hashids = require('hashids');
-var hashids = new Hashids("Compass Digital");
+const Hashids = require('hashids');
+const hashids = new Hashids("Compass Digital");
+
+const dictionary = {
+    "l": "location",
+    "m": "menu",
+    "i": "item"
+}
+
+var dictionary_flip = {};
+Object.keys(dictionary).forEach(function(short)
+{
+    dictionary_flip[dictionary[short]] = short;
+});
 
 class CompassDigitalId
 {
+    static word_shortform(longform)
+    {
+        if(!longform || typeof longform != "string") return;
+
+        return dictionary_flip[longform.toLowerCase()];
+    }
+
+    static word_longform(shortform)
+    {
+        if(!shortform || typeof shortform != "string") return;
+
+        return dictionary[shortform.toLowerCase()];
+    }
 
     static encode(config)
     {
@@ -11,7 +36,18 @@ class CompassDigitalId
             return;
         }
 
-        var joined = [config.service, config.provider, config.type, config.id.toString()].join(".");
+        var parts = [];
+        ["service", "provider", "type"].forEach(function(key)
+        {
+            var val = config[key].toString().toLowerCase();
+            var short_form = CompassDigitalId.word_shortform(val);
+
+            parts.push(short_form ? short_form.toUpperCase() : val);
+        });
+        parts.push(config.id);
+
+        var joined = parts.join(".");
+
         var hex_joined = Buffer(joined).toString("hex");
         var hashid = hashids.encodeHex(hex_joined);
 
@@ -24,16 +60,29 @@ class CompassDigitalId
         {
             var hex = hashids.decodeHex(id);
             var joined = Buffer(hex, "hex").toString();
-            var parsed = joined.split(".");
             
+            var parsed = joined.split(".");
+
             if(parsed.length == 4)
             {
-                return {
+                var json = {
                     service: parsed[0],
                     provider: parsed[1],
                     type: parsed[2],
                     id: parsed[3]
                 };
+
+                ["service", "provider", "type"].forEach(function(key)
+                {
+                    var val = json[key];
+                    if(val.toString().toUpperCase() == val)
+                    {
+                        val = CompassDigitalId.word_longform(val);
+                        if(val) json[key] = val;
+                    }
+                });
+
+                return json;
             }
             else
             {
