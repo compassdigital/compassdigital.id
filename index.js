@@ -31,7 +31,7 @@ class CompassDigitalId
 
     static encode(config)
     {
-        if(!config || !(config.service && config.provider && config.type && config.id))
+        if(!config || !(config.service && config.provider && config.type))
         {
             return;
         }
@@ -44,7 +44,7 @@ class CompassDigitalId
 
             parts.push(short_form ? short_form.toUpperCase() : val);
         });
-        parts.push(config.id);
+        if(config.id) parts.push(config.id.toString());
 
         var joined = parts.join(".");
 
@@ -63,7 +63,7 @@ class CompassDigitalId
             
             var parsed = joined.split(".");
 
-            if(parsed.length == 4)
+            if(parsed.length >= 3)
             {
                 var json = {
                     service: parsed[0],
