@@ -99,7 +99,7 @@ class CompassDigitalId
 
 module.exports = (data, provider, type, id) => {
 
-    if(data && provider && type && id)
+    if(data && provider && type)
     {
         return CompassDigitalId.encode({
             service: data,

@@ -117,6 +117,21 @@ describe("Compass Digital IDs", function()
 
     });
 
+    it("should generate an id even if id is null, using convenience format", function(done)
+    {
+        var null_id = compassdigitalid("menu", "bamco", "item");
+        should.exist(null_id);
+        compassdigitalid(null_id).should.eql({
+            service: "menu",
+            provider: "bamco",
+            type: "item",
+            id: undefined
+        });
+
+        done();
+
+    });
+
     it("should encode an id using params for convenience", function(done)
     {
         var new_id = compassdigitalid("menu", "bamco","item", 12345);
@@ -132,11 +147,10 @@ describe("Compass Digital IDs", function()
     {
         should.not.exist(compassdigitalid({
             service: "menu",
-            provider: "bamco",
             id: 12345
         }));
 
-        should.not.exist(compassdigitalid("menu", "bamco","item"));
+        should.not.exist(compassdigitalid("menu", null,"item"));
 
         done();
     });
