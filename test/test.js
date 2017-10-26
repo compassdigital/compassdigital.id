@@ -143,6 +143,26 @@ describe("Compass Digital IDs", function()
 
     });
 
+    it("should properly encode/decode locations", function(done)
+    {
+        var data = {
+            service: "location",
+            provider: "dh",
+            type: "brand",
+            id: "1056"
+        };
+
+        var new_id = compassdigitalid(data);
+
+        compassdigitalid(new_id).should.eql(data);
+
+        new_id = compassdigitalid("location", "dh", "brand", "1056");
+
+        compassdigitalid(new_id).should.eql(data);
+
+        done();
+    })
+
     it("should not create an id if invalid params are passed", function(done)
     {
         should.not.exist(compassdigitalid({
