@@ -2,9 +2,6 @@ language: node_js
 node_js:
   - "6.10"
 
-before_install:
-  - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-
 cache:
   directories:
     - "node_modules"
@@ -12,5 +9,3 @@ cache:
 script: 
     - npm install -g mocha
     - mocha test/* --bail --exit
-    - npm install -g serverless
-    - serverless deploy --stage dev
