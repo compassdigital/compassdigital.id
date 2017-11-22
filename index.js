@@ -4,7 +4,8 @@ const hashids = new Hashids("Compass Digital");
 const dictionary = {
     "l": "location",
     "m": "menu",
-    "i": "item"
+    "i": "item",
+    "c": "shoppingcart"
 }
 
 var dictionary_flip = {};
