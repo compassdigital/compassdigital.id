@@ -35,7 +35,18 @@ class CompassDigitalId
         if(!config || !(config.service && config.provider && config.type))
         {
             return;
-        }
+		}
+		
+		if(config.id)
+		{
+			var parsed = CompassDigitalId.decode(config.id);
+
+			// ID is already a CDL ID with the same config
+			if(parsed && parsed.service == config.service && parsed.provider == config.provider && parsed.type == config.type)
+			{
+				return config.id;
+			}
+		}
 
         var parts = [];
         ["service", "provider", "type"].forEach(function(key)
