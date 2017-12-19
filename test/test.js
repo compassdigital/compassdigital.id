@@ -63,6 +63,16 @@ describe("Compass Digital IDs", function()
 		});
 		
 		should.exist(new_id);
+		new_id.should.eql(id);
+
+		var new_id = compassdigitalid({
+            service: "menu",
+            provider: "bamco",
+            type: "option",
+            id: id
+		});
+		
+		should.exist(new_id);
 		new_id.should.not.eql(id);
 
 		done();

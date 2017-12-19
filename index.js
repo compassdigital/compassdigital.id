@@ -42,7 +42,7 @@ class CompassDigitalId
 			var parsed = CompassDigitalId.decode(config.id);
 
 			// ID is already a CDL ID with the same config
-			if(parsed && parsed.service == config.service && parsed.provider == config.provider && parsed.type == config.type)
+			if(parsed && parsed.service == config.service && parsed.type == config.type)
 			{
 				return config.id;
 			}
