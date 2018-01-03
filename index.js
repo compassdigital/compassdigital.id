@@ -5,7 +5,8 @@ const dictionary = {
     "l": "location",
     "m": "menu",
     "i": "item",
-    "c": "shoppingcart"
+	"c": "shoppingcart",
+	"o": "order"
 }
 
 var dictionary_flip = {};
