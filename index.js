@@ -52,7 +52,13 @@ class CompassDigitalId
         var parts = [];
         ["service", "provider", "type"].forEach(function(key)
         {
-            var val = config[key].toString().toLowerCase();
+			var val = config[key].toString().toLowerCase();
+
+			if(val.indexOf(".") >= 0)
+			{
+				throw new Error(`${key} cannot contain a period`);
+			}
+
             var short_form = CompassDigitalId.word_shortform(val);
 
             parts.push(short_form ? short_form.toUpperCase() : val);
@@ -78,11 +84,13 @@ class CompassDigitalId
 
             if(parsed.length >= 3)
             {
+				var id = parsed[3] ? joined.substring(parsed[0].length + parsed[1].length + parsed[2].length + 3) : parsed[3];
+
                 var json = {
                     service: parsed[0],
                     provider: parsed[1],
                     type: parsed[2],
-                    id: parsed[3]
+                    id: id
                 };
 
                 ["service", "provider", "type"].forEach(function(key)

@@ -131,6 +131,75 @@ describe("Compass Digital IDs", function()
 
         done();
 
+	});
+	
+	it("should encode an id that has a period in it", function(done)
+    {
+        var id = compassdigitalid({
+            service: "MENU",
+            provider: "BAMCO",
+            type: "ITEM",
+            id: "jonathan@compassdigital.io"
+        });
+        should.exist(id);
+        compassdigitalid(id).should.have.property("id").eql("jonathan@compassdigital.io");
+
+        done();
+
+	});
+	
+	it("should throw an exception if you try to define a service/provider/type with a period in it", function(done)
+    {
+		try
+		{
+			compassdigitalid({
+				service: "foo.bar",
+				provider: "BAMCO",
+				type: "ITEM",
+				id: "jonathan@compassdigital.io"
+			});
+
+			throw new Error("Should not get here");
+		}
+		catch(err)
+		{
+			err.should.have.property("message").eql("service cannot contain a period");
+		}
+
+		try
+		{
+			compassdigitalid({
+				service: "menu",
+				provider: "foo.bar",
+				type: "ITEM",
+				id: "jonathan@compassdigital.io"
+			});
+
+			throw new Error("Should not get here");
+		}
+		catch(err)
+		{
+			err.should.have.property("message").eql("provider cannot contain a period");
+		}
+
+		try
+		{
+			compassdigitalid({
+				service: "menu",
+				provider: "bamco",
+				type: "foo.bar",
+				id: "jonathan@compassdigital.io"
+			});
+
+			throw new Error("Should not get here");
+		}
+		catch(err)
+		{
+			err.should.have.property("message").eql("type cannot contain a period");
+		}
+
+        done();
+
     });
 
     it("should generate an id even if id is null", function(done)
