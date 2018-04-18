@@ -2,12 +2,16 @@
   "name": "@compassdigital/id",
   "version": "2.2.0",
   "description": "Compass Digital IDs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "dev": "npm run build -- -w",
+    "build": "babel index.js --out-dir dist",
     "test": "mocha test/* --bail"
   },
   "devDependencies": {
     "assert": "^1.4.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "should": "^11.2.1",
     "should-http": "^0.1.1"
   },
