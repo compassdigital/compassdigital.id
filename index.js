@@ -1,4 +1,4 @@
-const Hashids = require('hashids');
+const Hashids = require('hashids').default;
 const hashids = new Hashids("Compass Digital");
 
 const dictionary = {
