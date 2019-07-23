@@ -12,16 +12,16 @@ const dictionary = {
 var dictionary_flip = {};
 Object.keys(dictionary).forEach(function(short)
 {
-    dictionary_flip[dictionary[short]] = short;
+	dictionary_flip[dictionary[short]] = short;
 });
 
 class CompassDigitalId
 {
     static word_shortform(longform)
     {
-        if(!longform || typeof longform != "string") return;
-
-        return dictionary_flip[longform.toLowerCase()];
+		if(!longform || typeof longform != "string") return;
+		
+		return dictionary_flip[longform];
     }
 
     static word_longform(shortform)
