@@ -63,11 +63,11 @@ class CompassDigitalId
 
             parts.push(short_form ? short_form.toUpperCase() : val);
         });
-        if(config.id) parts.push(config.id.toString());
+		if(config.id) parts.push(config.id.toString());
 
         var joined = parts.join(".");
 
-        var hex_joined = Buffer(joined).toString("hex");
+		var hex_joined = Buffer(joined).toString("hex");
         var hashid = hashids.encodeHex(hex_joined);
 
         return hashid;
@@ -77,7 +77,8 @@ class CompassDigitalId
     {
         try
         {
-            var hex = hashids.decodeHex(id);
+			var hex = hashids.decodeHex(id);
+			if(Array.isArray(hex)) return;
             var joined = Buffer(hex, "hex").toString();
             
             var parsed = joined.split(".");
