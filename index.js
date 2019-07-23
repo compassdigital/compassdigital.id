@@ -96,8 +96,8 @@ class CompassDigitalId
 
                 ["service", "provider", "type"].forEach(function(key)
                 {
-                    var val = json[key];
-                    if(val.toString().toUpperCase() == val)
+					var val = json[key];
+					if(val.length === 1 && val.toString().toUpperCase() == val)
                     {
                         val = CompassDigitalId.word_longform(val);
                         if(val) json[key] = val;
