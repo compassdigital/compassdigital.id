@@ -295,6 +295,37 @@ describe("Compass Digital IDs", function()
     {
         should.not.exist(compassdigitalid(new Date()));
         done();
-    });
+	});
+	
+	it("should expose the internal functions", function(done)
+	{
+		const cdl_class = compassdigitalid();
+		cdl_class.should.have.properties(["decode", "encode"]);
+		should.exist(cdl_class.encode({
+            service: "menu",
+            provider: "bamco",
+            type: "item",
+            id: "12345"
+        }));
+		done();
+	});
+
+	it("should know if a string is an id or not", function(done)
+	{
+		var new_id = compassdigitalid({
+            service: "menu",
+            provider: "bamco",
+            type: "item",
+            id: "abc123"
+		});
+
+		const cdl_class = compassdigitalid();
+		cdl_class.valid(new_id).should.eql(true);
+		cdl_class.valid("abc123").should.eql(false);
+		cdl_class.valid("12323232234e1123").should.eql(false);
+		cdl_class.valid("12323232").should.eql(false);
+		done();
+
+	});
 
 });

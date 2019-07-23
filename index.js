@@ -71,7 +71,24 @@ class CompassDigitalId
         var hashid = hashids.encodeHex(hex_joined);
 
         return hashid;
-    }
+	}
+	
+	static valid(id)
+	{
+		try
+        {
+			if(!id) return false;
+			if(!id.length || id.length < 13) return false; // IDs never are smaller than 13 chars.
+
+			var hex = hashids.decodeHex(id);
+			if(Array.isArray(hex)) return false;
+			return true;
+		}
+		catch(err)
+		{
+			return false;
+		}
+	}
 
     static decode(id)
     {
@@ -79,7 +96,7 @@ class CompassDigitalId
         {
 			var hex = hashids.decodeHex(id);
 			if(Array.isArray(hex)) return;
-            var joined = Buffer(hex, "hex").toString();
+			var joined = Buffer(hex, "hex").toString();
             
             var parsed = joined.split(".");
 
@@ -134,8 +151,12 @@ module.exports = (data, provider, type, id) => {
     {
         return CompassDigitalId.decode(data);
     }
-    else
+    else if(data !== undefined)
     {
         return CompassDigitalId.encode(data);
-    }
+	}
+	else
+	{
+		return CompassDigitalId;
+	}
 }
