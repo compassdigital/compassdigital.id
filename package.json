@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/compassdigital/compassdigital.id#readme",
   "dependencies": {
-    "hashids": "^1.2.2"
+    "hashids": "^2.1.0"
   }
 }
