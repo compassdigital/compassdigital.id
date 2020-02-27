@@ -321,9 +321,17 @@ describe("Compass Digital IDs", function()
 
 		const cdl_class = compassdigitalid.CompassDigitalId;
 		cdl_class.valid(new_id).should.eql(true);
+		cdl_class.valid(undefined).should.eql(false);
+		cdl_class.valid(123).should.eql(false);
 		cdl_class.valid("abc123").should.eql(false);
 		cdl_class.valid("12323232234e1123").should.eql(false);
 		cdl_class.valid("12323232").should.eql(false);
+		done();
+
+	});
+	it("should decode undefined to undefined", function(done)
+	{
+		should.not.exist(compassdigitalid(undefined));
 		done();
 
 	});
