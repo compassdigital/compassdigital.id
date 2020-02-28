@@ -1,4 +1,5 @@
-const ID = require("../index.js");
+const ID = require("../");
+const cdl_id_class = require("../").CompassDigitalId;
 
 console.time("encoding");
 let ids = [];
@@ -15,7 +16,6 @@ for(let i = 0; i < 10000; i++)
 }
 console.timeEnd("decoding");
 
-const cdl_id_class = ID();
 
 console.time("validating");
 for(let i = 0; i < 10000; i++)

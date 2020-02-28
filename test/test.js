@@ -8,7 +8,7 @@ describe("Compass Digital IDs", function()
     var compassdigitalid = null,
         id = null;
 
-    it("should instantiate the library", function(done)
+    before( function(done)
     {
         compassdigitalid = require("../index.js");
         should.exist(compassdigitalid);
@@ -42,7 +42,7 @@ describe("Compass Digital IDs", function()
 
         done();
 	});
-	
+
 	it("should not re-encode an encoded id with the same config", function(done)
 	{
 		var new_id = compassdigitalid({
@@ -51,7 +51,7 @@ describe("Compass Digital IDs", function()
             type: "item",
             id: id
 		});
-		
+
 		should.exist(new_id);
 		new_id.should.eql(id);
 
@@ -61,7 +61,7 @@ describe("Compass Digital IDs", function()
             type: "item",
             id: id
 		});
-		
+
 		should.exist(new_id);
 		new_id.should.eql(id);
 
@@ -71,7 +71,7 @@ describe("Compass Digital IDs", function()
             type: "option",
             id: id
 		});
-		
+
 		should.exist(new_id);
 		new_id.should.not.eql(id);
 
@@ -132,7 +132,7 @@ describe("Compass Digital IDs", function()
         done();
 
 	});
-	
+
 	it("should encode an id that has a period in it", function(done)
     {
         var id = compassdigitalid({
@@ -147,7 +147,7 @@ describe("Compass Digital IDs", function()
         done();
 
 	});
-	
+
 	it("should throw an exception if you try to define a service/provider/type with a period in it", function(done)
     {
 		try
@@ -290,16 +290,16 @@ describe("Compass Digital IDs", function()
         should.not.exist((compassdigitalid("6351810")));
         done();
     });
-    
+
     it("should return nothing if a weird type is passed", function(done)
     {
         should.not.exist(compassdigitalid(new Date()));
         done();
 	});
-	
+
 	it("should expose the internal functions", function(done)
 	{
-		const cdl_class = compassdigitalid();
+		const cdl_class = compassdigitalid.CompassDigitalId;
 		cdl_class.should.have.properties(["decode", "encode"]);
 		should.exist(cdl_class.encode({
             service: "menu",
@@ -319,11 +319,19 @@ describe("Compass Digital IDs", function()
             id: "abc123"
 		});
 
-		const cdl_class = compassdigitalid();
+		const cdl_class = compassdigitalid.CompassDigitalId;
 		cdl_class.valid(new_id).should.eql(true);
+		cdl_class.valid(undefined).should.eql(false);
+		cdl_class.valid(123).should.eql(false);
 		cdl_class.valid("abc123").should.eql(false);
 		cdl_class.valid("12323232234e1123").should.eql(false);
 		cdl_class.valid("12323232").should.eql(false);
+		done();
+
+	});
+	it("should decode undefined to undefined", function(done)
+	{
+		should.not.exist(compassdigitalid(undefined));
 		done();
 
 	});
