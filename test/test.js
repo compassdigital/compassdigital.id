@@ -325,6 +325,10 @@ describe("Compass Digital IDs", function()
 		cdl_class.valid(123).should.eql(false);
 		cdl_class.valid("abc123").should.eql(false);
 		cdl_class.valid("12323232234e1123").should.eql(false);
+		cdl_class.valid(Date.now().toString()).should.eql(false);
+		cdl_class.valid('0408112729134111e177208782105365').should.eql(false);
+		cdl_class.valid('15829942683315').should.eql(false);
+		cdl_class.valid(15829942683315).should.eql(false);
 		cdl_class.valid("12323232").should.eql(false);
 		done();
 
