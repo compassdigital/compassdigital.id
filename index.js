@@ -79,7 +79,7 @@ class CompassDigitalId
 		{
 			if(!id) return false;
 			if(!id.length || id.length < 13) return false; // IDs never are smaller than 13 chars.
-
+			if(Number.isFinite(Number(id))) return false;
 			var hex = hashids.decodeHex(id);
 			if(!hex || Array.isArray(hex)) return false;
 			return true;

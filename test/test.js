@@ -318,17 +318,38 @@ describe("Compass Digital IDs", function()
             type: "item",
             id: "abc123"
 		});
-
 		const cdl_class = compassdigitalid.CompassDigitalId;
+
 		cdl_class.valid(new_id).should.eql(true);
 		cdl_class.valid(undefined).should.eql(false);
 		cdl_class.valid(123).should.eql(false);
 		cdl_class.valid("abc123").should.eql(false);
 		cdl_class.valid("12323232234e1123").should.eql(false);
+		cdl_class.valid(Date.now().toString()).should.eql(false);
+		cdl_class.valid('0408112729134111e177208782105365').should.eql(false);
+		cdl_class.valid('15829942683315').should.eql(false);
+		cdl_class.valid(15829942683315).should.eql(false);
 		cdl_class.valid("12323232").should.eql(false);
 		done();
 
 	});
+
+	it("should check validity of id correctly", function(done)
+	{
+		const cdl_class = compassdigitalid.CompassDigitalId;
+		for(let i = 0; i < 10000; i++)
+		{
+			const now = Date.now();
+			cdl_class.valid(
+					compassdigitalid("item", "test", "test", Math.random().toString().replace(".", ""))
+			).should.eql(true);
+			cdl_class.valid(compassdigitalid("item", "test", "test", now)).should.eql(true);
+			cdl_class.valid(now.toString()).should.eql(false);
+		}
+		done();
+
+	});
+
 	it("should decode undefined to undefined", function(done)
 	{
 		should.not.exist(compassdigitalid(undefined));
