@@ -15,7 +15,7 @@ npm install @compassdigital/id
 ```js
 const ID = require("@compassdigital/id");
 
-// or if prefered to use ES6 module import
+// or use ES6 module import syntax
 import ID from "@compassdigital/id";
 
 var new_id = ID({
