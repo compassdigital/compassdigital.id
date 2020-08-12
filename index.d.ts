@@ -15,7 +15,7 @@ declare module '@compassdigital/id' {
 		id: string
 	): CdlEncodedID | undefined;
 	function ID(decoded: CdlDecodedID): CdlEncodedID | undefined;
-	function ID(encoded: CdlEncodedID): CdlDecodedID | undefined;;
+	function ID(encoded: CdlEncodedID): CdlDecodedID | undefined;
 
 	export default ID;
 }
