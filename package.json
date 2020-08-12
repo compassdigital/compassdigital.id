@@ -3,6 +3,7 @@
   "version": "3.1.2",
   "description": "Compass Digital IDs",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "dev": "npm run build -- -w",
     "build": "babel index.js --out-dir dist",
