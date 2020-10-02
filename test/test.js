@@ -329,7 +329,10 @@ describe("Compass Digital IDs", function()
 		cdl_class.valid('0408112729134111e177208782105365').should.eql(false);
 		cdl_class.valid('15829942683315').should.eql(false);
 		cdl_class.valid(15829942683315).should.eql(false);
-		cdl_class.valid("12323232").should.eql(false);
+        cdl_class.valid("12323232").should.eql(false);
+        cdl_class.valid("8ba020a2a8da4557a3979d96336d74aa").should.eql(false);
+        cdl_class.valid("1aa020a2a8da4557a3979d96336d74a7").should.eql(false);
+
 		done();
 
 	});

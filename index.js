@@ -80,6 +80,8 @@ class CompassDigitalId
 			if(!id) return false;
 			if(!id.length || id.length < 13) return false; // IDs never are smaller than 13 chars.
 			if(Number.isFinite(Number(id))) return false;
+			let regexp = /^[0-9a-f]{8}[0-9a-f]{4}[0-5][0-9a-f]{3}[089ab][0-9a-f]{3}[0-9a-f]{12}$/i; //Checks if id is a non-hyphens uuid v1-v5
+			if(id.length === 32 && id.match(regexp)) return false;
 			var hex = hashids.decodeHex(id);
 			if(!hex || Array.isArray(hex)) return false;
 			return true;
