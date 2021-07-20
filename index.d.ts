@@ -1,9 +1,10 @@
 declare namespace cdl {
+	export type EncodedID = string;
 	export interface DecodedID {
 		service: string;
 		provider: string;
 		type: string;
-		id: string;
+		id?: string;
 	}
 }
 
@@ -26,7 +27,7 @@ declare module '@compassdigital/id' {
 		id: string
 	): string;
 	function ID(decoded: cdl.DecodedID): string;
-	function ID(encoded: string): cdl.DecodedID;
+	function ID(encoded: string): cdl.DecodedID | undefined;
 	function ID(encoded: string | undefined): cdl.DecodedID | undefined;
 	function ID(decoded: cdl.DecodedID | undefined): string | undefined;
 	export = ID;
