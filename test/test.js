@@ -340,7 +340,7 @@ describe("Compass Digital IDs", function()
 	it("should check validity of id correctly", function(done)
 	{
 		const cdl_class = compassdigitalid.CompassDigitalId;
-		for(let i = 0; i < 10000; i++)
+		for(let i = 0; i < 100; i++)
 		{
 			const now = Date.now();
 			cdl_class.valid(
