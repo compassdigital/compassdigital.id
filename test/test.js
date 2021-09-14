@@ -214,7 +214,7 @@ describe("Compass Digital IDs", function()
             service: "menu",
             provider: "bamco",
             type: "item",
-            id: undefined
+            id: ""
         });
 
         done();
@@ -229,7 +229,7 @@ describe("Compass Digital IDs", function()
             service: "menu",
             provider: "bamco",
             type: "item",
-            id: undefined
+            id: ""
         });
 
         done();

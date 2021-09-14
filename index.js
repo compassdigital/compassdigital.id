@@ -104,7 +104,7 @@ class CompassDigitalId
 
 			if(parsed.length >= 3)
 			{
-				var id = parsed[3] ? joined.substring(parsed[0].length + parsed[1].length + parsed[2].length + 3) : parsed[3];
+				var id = parsed[3] ? joined.substring(parsed[0].length + parsed[1].length + parsed[2].length + 3) : "";
 
 				var json = {
 					service: parsed[0],
