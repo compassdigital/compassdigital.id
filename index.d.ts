@@ -5,7 +5,7 @@ declare module '@compassdigital/id/interface' {
 		service: string;
 		provider: string;
 		type: string;
-		id?: string;
+		id: string;
 	}
 }
 
