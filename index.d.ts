@@ -27,7 +27,7 @@ declare module '@compassdigital/id' {
 		service: string,
 		provider: string,
 		type: string,
-		id: string
+		id: string | number
 	): string;
 	function ID(decoded: DecodedID): string;
 	function ID(encoded: string): DecodedID | undefined;
